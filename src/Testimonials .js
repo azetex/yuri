@@ -9,15 +9,11 @@ const Testimonials = () => {
   };
 
   useEffect(() => {
-    document.title = "JS Testimonials";
     window.addEventListener("keydown", handleKeyDown, false);
+    document.body.classList.add("article-is-visible");
+    document.title = "JS Testimonials";
     return () => window.removeEventListener("keydown", handleKeyDown, false);
   });
-
-  useEffect(() => {
-    document.title = "JS Testimonials";
-    document.body.classList.add("article-is-visible");
-  }, []);
 
   return (
     <div id="wrapper" onClick={(e) => e.target.id === "wrapper" && navigate("/")}>

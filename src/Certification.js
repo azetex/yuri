@@ -9,15 +9,11 @@ const Certification = () => {
   };
 
   useEffect(() => {
-    document.title = "JS Certification";
     window.addEventListener("keydown", handleKeyDown, false);
+    document.body.classList.add("article-is-visible");
+    document.title = "JS Certification";
     return () => window.removeEventListener("keydown", handleKeyDown, false);
   });
-
-  useEffect(() => {
-    document.title = "JS Certification";
-    document.body.classList.add("article-is-visible");
-  }, []);
 
   return (
     <div id="wrapper" onClick={(e) => e.target.id === "wrapper" && navigate("/")}>
