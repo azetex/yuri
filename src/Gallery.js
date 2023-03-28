@@ -21,10 +21,10 @@ const Gallery = (props) => {
   const handleNext = () => navigate("/gallery/" + ++id);
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown, false);
+    window.addEventListener("keydown", handleKeyDown);
     document.body.classList.add("article-is-visible");
     document.title = "JS Gallery/" + imageTitle;
-    return () => window.removeEventListener("keydown", handleKeyDown, false);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
   return (
