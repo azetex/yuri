@@ -1,24 +1,23 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import data from "../src/data.json";
+import data from "../src/gallery.json";
 
 const Gallery = (props) => {
   let { id } = useParams();
   const navigate = useNavigate();
-
   id = Number(id) < 0 ? 0 : Number(id) > data.images.length - 1 ? data.images.length - 1 : Number(id);
   const imageUrl = "../gallery/" + data.images[id].image;
   const imageTitle = data.images[id].caption;
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 27) navigate("/");
-    else if (e.keyCode === 37 && id > 0) navigate("/gallery/" + --id);
-    else if (e.keyCode === 39 && id < data.images.length - 1) navigate("/gallery/" + ++id);
+    else if (e.keyCode === 37 && id > 0) navigate(`/gallery/${id - 1}`);
+    else if (e.keyCode === 39 && id < data.images.length - 1) navigate(`/gallery/${id + 1}`);
   };
 
-  const handlePrev = () => navigate("/gallery/" + --id);
+  const handlePrev = () => navigate(`/gallery/${id - 1}`);
 
-  const handleNext = () => navigate("/gallery/" + ++id);
+  const handleNext = () => navigate(`/gallery/${id + 1}`);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -35,9 +34,9 @@ const Gallery = (props) => {
           <div className="slideshow">
             <div className="slide">
               <div className="slide-header">
-                <div className={id === 0 ? "slide-header-prev hide" : "slide-header-prev"} onClick={handlePrev}></div>
+                {id !== 0 && <div className="slide-header-prev" onClick={handlePrev}></div>}
                 <div className="slide-header-title">{imageTitle}</div>
-                <div className={id === data.images.length - 1 ? "slide-header-next hide" : "slide-header-next"} onClick={handleNext}></div>
+                {id !== data.images.length - 1 && <div className="slide-header-next" onClick={handleNext}></div>}
               </div>
               <div className="slide-image-container">
                 <img className="slide-image" src={imageUrl} alt={imageTitle} />
